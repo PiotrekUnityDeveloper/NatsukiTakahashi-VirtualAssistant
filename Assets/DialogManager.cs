@@ -12,19 +12,36 @@ public class DialogManager : MonoBehaviour
 
     public TMP_Text dialogText;
 
-    // Start is called before the first frame update
+    private VoiceManager voiceManager;
+
+    private void Awake()
+    {
+        voiceManager = this.gameObject.GetComponent<VoiceManager>();
+    }
+
     void Start()
     {
-        AddDialogToQueue(new DialogDefinition { message = "Hellluuuw!", showDelay = 1.4f, cooldown = 1f });
-        AddDialogToQueue(new DialogDefinition { message = "Howw are yuu doin?", showDelay = 2f, cooldown = 1f });
-        AddDialogToQueue(new DialogDefinition { message = "I know my speking buble is not as cutt as myself", showDelay = 2.5f, cooldown = 1f });
-        AddDialogToQueue(new DialogDefinition { message = "But am working on it, and soon..", showDelay = 1.5f, cooldown = 1f });
-        AddDialogToQueue(new DialogDefinition { message = "..it will be animatedd annd stuffff!!!!!", showDelay = 1.5f, cooldown = 1f });
-        AddDialogToQueue(new DialogDefinition { message = "i coont wait to seeit!! :3", showDelay = 1.5f, cooldown = 2.5f });
+        AddDialogToQueue(new DialogDefinition { message = "Hellluuuw!", showDelay = 1.4f, cooldown = 0.2f, voiceKey = "hello" });
+        AddDialogToQueue(new DialogDefinition { message = "Howw are yuu doin?", showDelay = 2f, cooldown = 0.2f, voiceKey = "how are you doin" });
+        AddDialogToQueue(new DialogDefinition { message = "I know my speking buble is not as cutt as myself", showDelay = 2.5f, cooldown = 0.6f, voiceKey = "speech bubble" });
+        AddDialogToQueue(new DialogDefinition { message = "But am working on it, and soon..", showDelay = 1.5f, cooldown = 0.2f, voiceKey = "working on it" });
+        AddDialogToQueue(new DialogDefinition { message = "..it will be animatedd annd stuffff!!!!!", showDelay = 1.5f, cooldown = 0.2f, voiceKey = "it will animate" });
+        AddDialogToQueue(new DialogDefinition { message = "i coont wait to seeit!! :3", showDelay = 1.5f, cooldown = 2.5f, voiceKey = "i cant wait" });
+        
+        /*
+        foreach(DialogDefinition def in activeDialogQueue)
+        {
+            SetDialogDelayToVoiceLength(def);
+        }*/
+
         StartQueue();
     }
 
-    // Update is called once per frame
+    private void SetDialogDelayToVoiceLength(DialogDefinition def)
+    {
+        def.showDelay = voiceManager.GetVoiceDefinitionFromList(def.voiceKey).voiceClip.length;
+    }
+
     void Update()
     {
         
@@ -40,6 +57,7 @@ public class DialogManager : MonoBehaviour
         if(activeDialogQueue.Count > 0)
         {
             activeDialog = activeDialogQueue[0];
+            voiceManager.PlayClip(activeDialog.voiceKey);
             StartCoroutine(TypeDialogMessage());
         }
     }
