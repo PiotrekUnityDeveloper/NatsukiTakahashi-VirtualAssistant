@@ -19,16 +19,9 @@ namespace Live2D.Cubism.Samples.OriginalWorkflow.Demo
         /// <returns>Mouse coordinates.</returns>
         public Vector3 GetPosition()
         {
-            if (!Input.GetMouseButton(0))
-            {
-                return Vector3.zero;
-            }
-
-            var targetPosition = Input.mousePosition;
-
-            targetPosition = (Camera.main.ScreenToViewportPoint(targetPosition) * 2) - Vector3.one;
-
-            return targetPosition;
+            Vector3 gameObjectPosition = transform.position;
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(gameObjectPosition);
+            return screenPosition;
         }
 
         /// <summary>

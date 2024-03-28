@@ -6,9 +6,9 @@ using UnityEngine;
 public class VoiceManager : MonoBehaviour
 {
 
-    private Dictionary<string, VoiceDefinition> voiceDictionary = new Dictionary<string, VoiceDefinition>();
-    public List<VoiceDefinition> voiceDefs = new List<VoiceDefinition>();
-    public AudioSource characterAudioSource;
+    private Dictionary<string, VoiceDefinition> voiceDictionary = new Dictionary<string, VoiceDefinition>(); //voiceovers dict
+    public List<VoiceDefinition> voiceDefs = new List<VoiceDefinition>(); //this stores our voiceovers and their keys
+    public AudioSource characterAudioSource; //audio source
 
     private void Awake()
     {
@@ -35,7 +35,7 @@ public class VoiceManager : MonoBehaviour
         
     }
 
-    public void PlayClip(string key)
+    public void PlayClip(string key) // Play a clip based on voiceClip
     {
         if(characterAudioSource.isPlaying) characterAudioSource.Stop();
         characterAudioSource.clip = GetVoiceDefinition(key).voiceClip;
@@ -85,6 +85,6 @@ public class VoiceManager : MonoBehaviour
 [System.Serializable]
 public class VoiceDefinition
 {
-    public string key;
-    public AudioClip voiceClip;
+    public string key; // used to authenticate the voice-over we want to play
+    public AudioClip voiceClip; // the voice-over file
 }

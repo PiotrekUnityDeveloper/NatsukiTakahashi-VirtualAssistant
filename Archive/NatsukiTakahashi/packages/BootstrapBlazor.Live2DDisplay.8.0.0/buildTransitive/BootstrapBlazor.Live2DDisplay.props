@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/BootstrapBlazor.Live2DDisplay.props" />
+</Project>
