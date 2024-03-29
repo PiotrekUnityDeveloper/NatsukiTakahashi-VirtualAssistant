@@ -79,7 +79,7 @@ public class SystemManager : MonoBehaviour
     {
         allowedProcesses = GameManager.knownProcesses;
 
-        //InitializeBounds(); TODO: fix
+        StartCoroutine(InitializeBounds()); //TODO: fix
 
         Setup();
 
@@ -202,16 +202,62 @@ public class SystemManager : MonoBehaviour
     #endregion win32references
 
     public GameObject windowPrefab;
+    public GameObject displayPrefab;
     public Camera mainCamera;
+    public Camera displayCamera;
 
-    public void InitializeBounds()
+    public IEnumerator InitializeBounds()
     {
+        yield return new WaitForSecondsRealtime(4f);
+
         uint currentProcessId = GetCurrentProcessId();
 
         foreach (Process process in Process.GetProcesses())
         {
             if (process.Id == currentProcessId)
+            {
+                RECT rt1 = new RECT();
+                bool locationLookupSucceeded1 = GetWindowRect(process.MainWindowHandle, out rt1);
+
+                // Calculate the width and height of the window
+                int width = rt1.Right - rt1.Left;
+                int height = rt1.Bottom - rt1.Top;
+
+                // Calculate the position of the window's center
+                int centerX = (rt1.Left + rt1.Right) / 2;
+                int centerY = (rt1.Top + rt1.Bottom) / 2;
+
+                if (width <= 0 || height <= 0)
+                {
+                    continue;
+                }
+
+                // Invert the Y-coordinate to match Unity's coordinate system
+                int invertedTop = Screen.height - rt1.Top;
+                int invertedBottom = Screen.height - rt1.Bottom;
+
+                // Calculate the center of the window in screen coordinates
+                Vector3 windowCenter = new Vector3((rt1.Left + rt1.Right) / 2f, (invertedTop + invertedBottom) / 2f, 0f);
+
+                // Convert the screen coordinates to world coordinates based on the camera's viewport
+                Vector3 worldCenter = mainCamera.ScreenToWorldPoint(windowCenter);
+
+                // Calculate the width and height of the window in world coordinates
+                Vector3 worldWidth = mainCamera.ScreenToWorldPoint(new Vector3(rt1.Right, invertedTop, 0f)) - mainCamera.ScreenToWorldPoint(new Vector3(rt1.Left, invertedTop, 0f));
+                Vector3 worldHeight = mainCamera.ScreenToWorldPoint(new Vector3(rt1.Left, invertedBottom, 0f)) - mainCamera.ScreenToWorldPoint(new Vector3(rt1.Left, invertedTop, 0f));
+
+                // Instantiate the square GameObject
+                GameObject square = Instantiate(displayPrefab, worldCenter, Quaternion.identity);
+
+                // Resize the square to match the window size
+                square.transform.localScale = new Vector3(worldWidth.magnitude, worldHeight.magnitude, 1f);
+                square.name = "Display0000";
+
+                yield return new WaitForSeconds(1f);
+
+                AdjustCameraToFitObject(displayCamera, square);
                 continue;
+            }
 
             bool isknown = false;
 
@@ -263,13 +309,19 @@ public class SystemManager : MonoBehaviour
                 // Instantiate the square GameObject
                 GameObject square = Instantiate(windowPrefab, worldCenter, Quaternion.identity);
 
+                WindowDefinition windef = square.AddComponent<WindowDefinition>();
+                windef.systemManager = this;
+                windef.myProcess = process;
+                windef.updateDelay = 0.5f;
+
                 // Resize the square to match the window size
                 square.transform.localScale = new Vector3(worldWidth.magnitude, worldHeight.magnitude, 1f);
                 square.name = process.ProcessName;
 
                 if (!IsWindowVisible(process.MainWindowHandle))
                 {
-                    square.SetActive(false);
+                    // doesnt work, idk, so minimized windows are still showing haha >:(((((
+                    //square.SetActive(false);
                 }
             }
         }
@@ -284,9 +336,57 @@ public class SystemManager : MonoBehaviour
         return foregroundWindowHandle == process.MainWindowHandle;
     }
 
-    public void UpdateBounds()
+    public void UpdateBounds(Process process, GameObject windowObject)
     {
+        RECT rt = new RECT();
+        bool locationLookupSucceeded = GetWindowRect(process.MainWindowHandle, out rt);
 
+        if (locationLookupSucceeded)
+        {
+            //same calculations as for our window instantiation :)
+
+            // Calculate the width and height of the window
+            int width = rt.Right - rt.Left;
+            int height = rt.Bottom - rt.Top;
+            // Calculate the position of the window's center
+            int centerX = (rt.Left + rt.Right) / 2;
+            int centerY = (rt.Top + rt.Bottom) / 2;
+            // Invert the Y-coordinate to match Unity's coordinate system
+            int invertedTop = Screen.height - rt.Top;
+            int invertedBottom = Screen.height - rt.Bottom;
+            // Calculate the center of the window in screen coordinates
+            Vector3 windowCenter = new Vector3((rt.Left + rt.Right) / 2f, (invertedTop + invertedBottom) / 2f, 0f);
+            // Convert the screen coordinates to world coordinates based on the camera's viewport
+            Vector3 worldCenter = mainCamera.ScreenToWorldPoint(windowCenter);
+            // Calculate the width and height of the window in world coordinates
+            Vector3 worldWidth = mainCamera.ScreenToWorldPoint(new Vector3(rt.Right, invertedTop, 0f)) - mainCamera.ScreenToWorldPoint(new Vector3(rt.Left, invertedTop, 0f));
+            Vector3 worldHeight = mainCamera.ScreenToWorldPoint(new Vector3(rt.Left, invertedBottom, 0f)) - mainCamera.ScreenToWorldPoint(new Vector3(rt.Left, invertedTop, 0f));
+
+            //Update the window position
+            windowObject.transform.position = worldCenter;
+            //Update the window size/bounds
+            windowObject.transform.localScale = new Vector3(worldWidth.magnitude, worldHeight.magnitude, 1f);
+        }
+    }
+
+    public void AdjustCameraToFitObject(Camera orthographicCamera, GameObject gameObject)
+    {
+        SpriteRenderer objectRenderer = gameObject.GetComponent<SpriteRenderer>();
+        Bounds objectBounds = objectRenderer.bounds;
+
+        // Calculate required camera size to fit the object exactly
+        float requiredCameraSize = Mathf.Max(objectBounds.size.x, objectBounds.size.y) / 2f;
+
+        // Set camera size
+        orthographicCamera.orthographicSize = requiredCameraSize / 2;
+
+        print("Border Width = " + objectBounds.size.x + " : " + objectBounds.size.y + "  Camera Size: " + orthographicCamera.orthographicSize);
+
+        // Set camera position to center the object
+        Vector3 objectCenter = objectBounds.center;
+        orthographicCamera.transform.position = new Vector3(objectCenter.x, objectCenter.y, orthographicCamera.transform.position.z);
+
+        Destroy(gameObject, 5);
     }
 
     //util

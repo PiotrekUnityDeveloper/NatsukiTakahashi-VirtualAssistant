@@ -44,6 +44,10 @@ public class GameManager : MonoBehaviour
         "Minecraft",
         "Discord",
         "Chrome",
+        "AudioStreamer",
+        //"VisualStudio",
+        "Taskmgr",
+        "SampleWindow",
     };
     
     // Win32 import START
