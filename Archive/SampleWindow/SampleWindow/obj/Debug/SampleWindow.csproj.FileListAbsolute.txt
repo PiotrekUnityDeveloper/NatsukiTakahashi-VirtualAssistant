@@ -1,0 +1,11 @@
+C:\Users\Piotr\Desktop\audiostreamer2\SampleWindow\SampleWindow\bin\Debug\SampleWindow.exe.config
+C:\Users\Piotr\Desktop\audiostreamer2\SampleWindow\SampleWindow\bin\Debug\SampleWindow.exe
+C:\Users\Piotr\Desktop\audiostreamer2\SampleWindow\SampleWindow\bin\Debug\SampleWindow.pdb
+C:\Users\Piotr\Desktop\audiostreamer2\SampleWindow\SampleWindow\obj\Debug\SampleWindow.csproj.AssemblyReference.cache
+C:\Users\Piotr\Desktop\audiostreamer2\SampleWindow\SampleWindow\obj\Debug\SampleWindow.csproj.SuggestedBindingRedirects.cache
+C:\Users\Piotr\Desktop\audiostreamer2\SampleWindow\SampleWindow\obj\Debug\SampleWindow.Form1.resources
+C:\Users\Piotr\Desktop\audiostreamer2\SampleWindow\SampleWindow\obj\Debug\SampleWindow.Properties.Resources.resources
+C:\Users\Piotr\Desktop\audiostreamer2\SampleWindow\SampleWindow\obj\Debug\SampleWindow.csproj.GenerateResource.cache
+C:\Users\Piotr\Desktop\audiostreamer2\SampleWindow\SampleWindow\obj\Debug\SampleWindow.csproj.CoreCompileInputs.cache
+C:\Users\Piotr\Desktop\audiostreamer2\SampleWindow\SampleWindow\obj\Debug\SampleWindow.exe
+C:\Users\Piotr\Desktop\audiostreamer2\SampleWindow\SampleWindow\obj\Debug\SampleWindow.pdb

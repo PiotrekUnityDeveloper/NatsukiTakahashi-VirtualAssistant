@@ -1,0 +1,11 @@
+C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\bin\Debug\NatsukiLauncher.exe.config
+C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\bin\Debug\NatsukiLauncher.exe
+C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\bin\Debug\NatsukiLauncher.pdb
+C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\obj\Debug\NatsukiLauncher.csproj.AssemblyReference.cache
+C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\obj\Debug\NatsukiLauncher.csproj.SuggestedBindingRedirects.cache
+C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\obj\Debug\NatsukiLauncher.Form1.resources
+C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\obj\Debug\NatsukiLauncher.Properties.Resources.resources
+C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\obj\Debug\NatsukiLauncher.csproj.GenerateResource.cache
+C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\obj\Debug\NatsukiLauncher.csproj.CoreCompileInputs.cache
+C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\obj\Debug\NatsukiLauncher.exe
+C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\obj\Debug\NatsukiLauncher.pdb
