@@ -266,7 +266,7 @@ public class SystemManager : MonoBehaviour
 
                 AdjustCameraToFitObject(displayCamera, square);
 
-                yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(1f);
 
                 UpdateColliders();
                 continue;
@@ -462,13 +462,20 @@ public class SystemManager : MonoBehaviour
 
     public GameObject character;
 
+    //please work
+    public GameObject displayCameraPoint;
+
     public float extension = 0f;
 
-    void UpdateColliders()
+    //[ContextMenuItem("Update Colliders")]
+    [ContextMenu("Update Colliders")]
+    public void UpdateColliders()
     {
         // Calculate camera bounds
         float cameraHeight = displayCamera.orthographicSize * 2;
         float cameraWidth = cameraHeight * displayCamera.aspect;
+
+        //colliderParent.transform.localScale = displayCamera.transform.localScale;
 
         // Position colliders
         topCollider.transform.position = new Vector3(0, cameraHeight / 2 + extension, 0);
@@ -489,6 +496,8 @@ public class SystemManager : MonoBehaviour
         bottomCollider.GetComponent<BoxCollider2D>().isTrigger = false;
 
         //colliderParent.transform.position = new Vector3(displayCamera.gameObject.transform.position.x, displayCamera.gameObject.transform.position.y , character.transform.position.z);
-        colliderParent.transform.position = originPos;
+        //colliderParent.transform.position = originPos;
+        //colliderParent.transform.position = displayCameraPoint.transform.position;
+        //colliderParent.transform.position = displayCamera.transform.position;
     }
 }
