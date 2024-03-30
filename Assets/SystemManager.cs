@@ -206,6 +206,10 @@ public class SystemManager : MonoBehaviour
     public Camera mainCamera;
     public Camera displayCamera;
 
+    public static float Xwidth;
+    public static float Yheight;
+    public static Vector3 originPos;
+
     public IEnumerator InitializeBounds()
     {
         yield return new WaitForSecondsRealtime(4f);
@@ -253,9 +257,18 @@ public class SystemManager : MonoBehaviour
                 square.transform.localScale = new Vector3(worldWidth.magnitude, worldHeight.magnitude, 1f);
                 square.name = "Display0000";
 
+                originPos = square.transform.position;
+
+                Xwidth = square.GetComponent<SpriteRenderer>().bounds.size.x;
+                Yheight = square.GetComponent<SpriteRenderer>().bounds.size.y;
+
                 yield return new WaitForSeconds(1f);
 
                 AdjustCameraToFitObject(displayCamera, square);
+
+                yield return new WaitForSeconds(5f);
+
+                UpdateColliders();
                 continue;
             }
 
@@ -440,4 +453,42 @@ public class SystemManager : MonoBehaviour
         return texture;
     }
 
+    public GameObject colliderParent;
+
+    public GameObject topCollider;
+    public GameObject bottomCollider;
+    public GameObject leftCollider;
+    public GameObject rightCollider;
+
+    public GameObject character;
+
+    public float extension = 0f;
+
+    void UpdateColliders()
+    {
+        // Calculate camera bounds
+        float cameraHeight = displayCamera.orthographicSize * 2;
+        float cameraWidth = cameraHeight * displayCamera.aspect;
+
+        // Position colliders
+        topCollider.transform.position = new Vector3(0, cameraHeight / 2 + extension, 0);
+        topCollider.transform.localScale = new Vector3(cameraWidth * 2, 1, 1);
+
+        bottomCollider.transform.position = new Vector3(0, -cameraHeight / 2 - extension, 0);
+        bottomCollider.transform.localScale = new Vector3(cameraWidth * 2, 1, 1);
+
+        leftCollider.transform.position = new Vector3(-cameraWidth / 2 - extension, 0, 0);
+        leftCollider.transform.localScale = new Vector3(1, cameraHeight * 2, 1);
+
+        rightCollider.transform.position = new Vector3(cameraWidth / 2 + extension, 0, 0);
+        rightCollider.transform.localScale = new Vector3(1, cameraHeight * 2, 1);
+
+        rightCollider.GetComponent<BoxCollider2D>().isTrigger = false;
+        leftCollider.GetComponent<BoxCollider2D>().isTrigger = false;
+        topCollider.GetComponent<BoxCollider2D>().isTrigger = false;
+        bottomCollider.GetComponent<BoxCollider2D>().isTrigger = false;
+
+        //colliderParent.transform.position = new Vector3(displayCamera.gameObject.transform.position.x, displayCamera.gameObject.transform.position.y , character.transform.position.z);
+        colliderParent.transform.position = originPos;
+    }
 }
