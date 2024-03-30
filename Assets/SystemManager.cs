@@ -476,18 +476,19 @@ public class SystemManager : MonoBehaviour
         float cameraWidth = cameraHeight * displayCamera.aspect;
 
         //colliderParent.transform.localScale = displayCamera.transform.localScale;
+        colliderParent.transform.position = displayCamera.transform.position;
 
         // Position colliders
-        topCollider.transform.position = new Vector3(0, cameraHeight / 2 + extension, 0);
+        topCollider.transform.localPosition = new Vector3(0, cameraHeight / 2 + extension, 0);
         topCollider.transform.localScale = new Vector3(cameraWidth * 2, 1, 1);
 
-        bottomCollider.transform.position = new Vector3(0, -cameraHeight / 2 - extension, 0);
+        bottomCollider.transform.localPosition = new Vector3(0, -cameraHeight / 2 - extension, 0);
         bottomCollider.transform.localScale = new Vector3(cameraWidth * 2, 1, 1);
 
-        leftCollider.transform.position = new Vector3(-cameraWidth / 2 - extension, 0, 0);
+        leftCollider.transform.localPosition = new Vector3(-cameraWidth / 2 - extension, 0, 0);
         leftCollider.transform.localScale = new Vector3(1, cameraHeight * 2, 1);
 
-        rightCollider.transform.position = new Vector3(cameraWidth / 2 + extension, 0, 0);
+        rightCollider.transform.localPosition = new Vector3(cameraWidth / 2 + extension, 0, 0);
         rightCollider.transform.localScale = new Vector3(1, cameraHeight * 2, 1);
 
         rightCollider.GetComponent<BoxCollider2D>().isTrigger = false;
