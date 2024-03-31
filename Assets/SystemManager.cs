@@ -58,6 +58,14 @@ public class SystemManager : MonoBehaviour
     static extern int SetLayeredWindowAttributes(IntPtr hwnd, uint crKey, byte bAlpha, uint dwFlags);
     // Win32 import END
 
+    [DllImport("User32.dll")]
+    public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+    [DllImport("User32.dll")]
+    public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+    private const int GWL_EXSTYLE2 = -0x14;
+    private const int WS_EX_TOOLWINDOW = 0x0080;
+
     const int GWL_EXSTYLE = -20;
 
     const uint WS_EX_LAYERED = 0x00080000;
@@ -85,7 +93,8 @@ public class SystemManager : MonoBehaviour
 
         Application.runInBackground = true;
 
-        #if !UNITY_EDITOR
+#if !UNITY_EDITOR
+        // transparency
         IntPtr hWnd = GetActiveWindow();
         //hWnd = GetCurrentProcess();
         // a value of -1 on any of the window margins, makes the backgrouond of the game's window transparent
@@ -97,7 +106,11 @@ public class SystemManager : MonoBehaviour
 
         SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, 0);
 
-        #endif
+        // hide icon from taskbar
+        IntPtr pMainWindow = GetActiveWindow();
+        SetWindowLong(pMainWindow, GWL_EXSTYLE, GetWindowLong(pMainWindow, GWL_EXSTYLE2) | WS_EX_TOOLWINDOW);
+
+#endif
     }
 
     private void SetClickThrough(bool clickthrough)
