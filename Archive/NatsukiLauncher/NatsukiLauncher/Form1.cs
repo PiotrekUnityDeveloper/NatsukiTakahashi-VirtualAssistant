@@ -19,6 +19,10 @@ namespace NatsukiLauncher
         public Form1()
         {
             InitializeComponent();
+
+            //artworkscroller.Scroll += Panel1_Scroll;
+            artworkpanel2.MouseWheel += Panel1_MouseWheel;
+
             CheckForFirstTime();
             LoadSettings();
             InitNotifyIcon();
@@ -404,10 +408,13 @@ namespace NatsukiLauncher
             label12.Parent = pictureBox1;
             label11.Parent = pictureBox1;
             label10.Parent = pictureBox1;
+
+            initialArtwPos = artworkscroller.Location;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            LoadArtwork();
             artworkpanel2.Show();
             artworkpanel2.Location = new Point(12, 162);
         }
@@ -415,6 +422,7 @@ namespace NatsukiLauncher
         private void label5_Click(object sender, EventArgs e)
         {
             artworkpanel2.Hide();
+            UnLoadArtwork();
         }
 
         private void label8_Click(object sender, EventArgs e)
@@ -488,6 +496,165 @@ namespace NatsukiLauncher
         private void button5_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void artworkpanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private int artworkSpacing = 5;
+        private int imagesInRow = 3;
+        private int imageHeight = 50;
+        private Point initialArtwPos;
+
+        public void LoadArtwork()
+        {
+            string[] files = Directory.GetFiles(Environment.CurrentDirectory + "\\build\\artwork\\");
+
+            int currentIndex = 0;
+            int currentRow = 0;
+            int rowCounter = 0;
+
+            foreach (string file in files)
+            {
+                if (file.EndsWith(".png") || file.EndsWith(".jpg"))
+                {
+                    currentIndex += 1;
+                    rowCounter += 1;
+
+                    try
+                    {
+                        PictureBox newImage = new PictureBox();
+                        newImage.Visible = false;
+
+                        newImage.Click += (sender, e) =>
+                        {
+                            ImageViewer imgview = new ImageViewer();
+                            imgview.filePath = file;
+                            imgview.ShowDialog();
+                        };
+
+                        int pictureWidth = (artworkscroller.Width - ((imagesInRow + 1) * artworkSpacing)) / imagesInRow;
+                        int imageRowValue = (rowCounter - 1) * (pictureWidth + artworkSpacing);
+
+                        newImage.Location = new Point(imageRowValue, currentRow * (imageHeight + artworkSpacing));
+                        newImage.SizeMode = PictureBoxSizeMode.Zoom;
+                        newImage.BackColor = Color.White;
+                        newImage.Load(file);
+
+                        artworkscroller.Controls.Add(newImage);
+                        newImage.Show();
+
+                        newImage.Cursor = Cursors.Hand;
+
+                        if (rowCounter >= imagesInRow)
+                        {
+                            currentRow++;
+                            rowCounter = 0;
+                        }
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+
+            //MessageBox.Show(currentRow.ToString());
+
+            artworkscroller.Size = new Size(artworkscroller.Width, (currentRow + 1) * (imageHeight + artworkSpacing));
+
+            vScrollBar1.Maximum = artworkscroller.Height;
+        }
+
+
+        public void UnLoadArtwork()
+        {
+            foreach(Control c in artworkscroller.Controls)
+            {
+                if(c != artworkscroller && c.GetType() == typeof(PictureBox))
+                {
+                    try {
+                        ((PictureBox)c).Image = null;
+                        c.Hide();
+                        ((PictureBox)c).Dispose();
+                        artworkscroller.Controls.Remove(c); } catch { /*fuck*/ }
+                }
+            }
+        }
+
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+            artworkscroller.Location = new Point(artworkscroller.Location.X, initialArtwPos.Y - vScrollBar1.Value);
+        }
+
+        private void Panel1_Scroll(object sender, ScrollEventArgs e)
+        {
+            //MessageBox.Show("scroll!");
+        }
+
+        private void Panel1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            //MessageBox.Show("scroll!");
+
+            if(e.Delta > 0)
+            {
+                if (vScrollBar1.Value - 10 < vScrollBar1.Minimum)
+                {
+                    vScrollBar1.Value = vScrollBar1.Minimum;
+                }
+                else
+                {
+                    vScrollBar1.Value = vScrollBar1.Value - 10;
+                }
+            }
+            else
+            {
+                if (vScrollBar1.Value + 10 > vScrollBar1.Maximum)
+                {
+                    vScrollBar1.Value = vScrollBar1.Maximum;
+                }
+                else
+                {
+                    vScrollBar1.Value = vScrollBar1.Value + 10;
+                }
+            }
+
+            artworkscroller.Location = new Point(artworkscroller.Location.X, initialArtwPos.Y - vScrollBar1.Value);
+        }
+
+        private void artworkpanel2_Scroll(object sender, ScrollEventArgs e)
+        {
+            /*
+            if (e.Type == ScrollEventType.SmallDecrement || e.Type == ScrollEventType.LargeDecrement)
+            {
+                //MessageBox.Show("Panel scrolled up. Scroll position: " + panel1.VerticalScroll.Value);
+
+                if (vScrollBar1.Value + 10 > vScrollBar1.Maximum)
+                {
+                    vScrollBar1.Value = vScrollBar1.Maximum;
+                }
+                else
+                {
+                    vScrollBar1.Value = vScrollBar1.Value + 10;
+                }
+
+            }
+            else if (e.Type == ScrollEventType.SmallIncrement || e.Type == ScrollEventType.LargeIncrement)
+            {
+                //MessageBox.Show("Panel scrolled down. Scroll position: " + panel1.VerticalScroll.Value);
+
+                if (vScrollBar1.Value - 10 < vScrollBar1.Minimum)
+                {
+                    vScrollBar1.Value = vScrollBar1.Minimum;
+                }
+                else
+                {
+                    vScrollBar1.Value = vScrollBar1.Value - 10;
+                }
+            }
+            */
         }
     }
 }

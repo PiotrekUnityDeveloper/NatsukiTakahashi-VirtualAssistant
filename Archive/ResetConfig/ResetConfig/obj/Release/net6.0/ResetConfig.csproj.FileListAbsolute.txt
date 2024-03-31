@@ -1,0 +1,15 @@
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\bin\Release\net6.0\ResetConfig.exe
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\bin\Release\net6.0\ResetConfig.deps.json
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\bin\Release\net6.0\ResetConfig.runtimeconfig.json
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\bin\Release\net6.0\ResetConfig.dll
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\bin\Release\net6.0\ResetConfig.pdb
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\obj\Release\net6.0\ResetConfig.csproj.AssemblyReference.cache
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\obj\Release\net6.0\ResetConfig.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\obj\Release\net6.0\ResetConfig.AssemblyInfoInputs.cache
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\obj\Release\net6.0\ResetConfig.AssemblyInfo.cs
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\obj\Release\net6.0\ResetConfig.csproj.CoreCompileInputs.cache
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\obj\Release\net6.0\ResetConfig.dll
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\obj\Release\net6.0\refint\ResetConfig.dll
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\obj\Release\net6.0\ResetConfig.pdb
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\obj\Release\net6.0\ResetConfig.genruntimeconfig.cache
+C:\Users\Piotr\Desktop\audiostreamer2\ResetConfig\ResetConfig\obj\Release\net6.0\ref\ResetConfig.dll

@@ -32,10 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.runMenuMangerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tellAFunJokeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,20 +43,21 @@
             this.goToSleepToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.forceRestartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.artworkpanel2 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.configpanel2 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.aboutpanel2 = new System.Windows.Forms.Panel();
+            this.artworkscroller = new System.Windows.Forms.Panel();
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -96,15 +97,23 @@
             this.panel1.TabIndex = 6;
             this.panel1.Visible = false;
             // 
-            // richTextBox1
+            // label3
             // 
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.richTextBox1.Location = new System.Drawing.Point(0, 24);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(538, 154);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "Initializing...";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 183);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(279, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "PRO TIP: You can stop this process from your system tray";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(61, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Initializing...";
             // 
             // button6
             // 
@@ -117,23 +126,15 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // label2
+            // richTextBox1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Initializing...";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 183);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(279, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "PRO TIP: You can stop this process from your system tray";
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.richTextBox1.Location = new System.Drawing.Point(0, 24);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(538, 154);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "Initializing...";
             // 
             // contextMenuStrip1
             // 
@@ -183,24 +184,17 @@
             // artworkpanel2
             // 
             this.artworkpanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.artworkpanel2.Controls.Add(this.label6);
-            this.artworkpanel2.Controls.Add(this.label5);
+            this.artworkpanel2.Controls.Add(this.vScrollBar1);
             this.artworkpanel2.Controls.Add(this.label4);
-            this.artworkpanel2.Location = new System.Drawing.Point(559, 331);
+            this.artworkpanel2.Controls.Add(this.label5);
+            this.artworkpanel2.Controls.Add(this.artworkscroller);
+            this.artworkpanel2.Location = new System.Drawing.Point(555, 237);
             this.artworkpanel2.Name = "artworkpanel2";
             this.artworkpanel2.Size = new System.Drawing.Size(541, 206);
             this.artworkpanel2.TabIndex = 8;
             this.artworkpanel2.Visible = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(180, 5);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(180, 37);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "ARTWORK";
+            this.artworkpanel2.Scroll += new System.Windows.Forms.ScrollEventHandler(this.artworkpanel2_Scroll);
+            this.artworkpanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.artworkpanel2_Paint);
             // 
             // label5
             // 
@@ -215,15 +209,15 @@
             this.label5.Text = "X";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // label6
+            // label4
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.Location = new System.Drawing.Point(204, 101);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(119, 24);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "no artwork :((";
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Location = new System.Drawing.Point(180, 5);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(180, 37);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "ARTWORK";
             // 
             // configpanel2
             // 
@@ -239,6 +233,50 @@
             this.configpanel2.Size = new System.Drawing.Size(541, 206);
             this.configpanel2.TabIndex = 9;
             this.configpanel2.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label7.Location = new System.Drawing.Point(123, 136);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(284, 24);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "How should Natsuki call you?";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBox1.Location = new System.Drawing.Point(107, 163);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(319, 31);
+            this.textBox1.TabIndex = 4;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Enabled = false;
+            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkBox2.Location = new System.Drawing.Point(3, 94);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(538, 29);
+            this.checkBox2.TabIndex = 3;
+            this.checkBox2.Text = "Leave the launcher open, when Natsuki is ready";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkBox1.Location = new System.Drawing.Point(3, 59);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(503, 29);
+            this.checkBox1.TabIndex = 2;
+            this.checkBox1.Text = "Always run Natsuki, when computer boots up";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // label8
             // 
@@ -262,50 +300,6 @@
             this.label9.Size = new System.Drawing.Size(142, 37);
             this.label9.TabIndex = 0;
             this.label9.Text = "CONFIG";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkBox1.Location = new System.Drawing.Point(3, 59);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(503, 29);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Always run Natsuki, when computer boots up";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Enabled = false;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkBox2.Location = new System.Drawing.Point(3, 94);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(538, 29);
-            this.checkBox2.TabIndex = 3;
-            this.checkBox2.Text = "Leave the launcher open, when Natsuki is ready";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox1.Location = new System.Drawing.Point(107, 163);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(319, 31);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(123, 136);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(284, 24);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "How should Natsuki call you?";
             // 
             // label12
             // 
@@ -356,6 +350,21 @@
             this.aboutpanel2.Size = new System.Drawing.Size(541, 206);
             this.aboutpanel2.TabIndex = 10;
             this.aboutpanel2.Visible = false;
+            // 
+            // artworkscroller
+            // 
+            this.artworkscroller.Location = new System.Drawing.Point(3, 47);
+            this.artworkscroller.Name = "artworkscroller";
+            this.artworkscroller.Size = new System.Drawing.Size(508, 154);
+            this.artworkscroller.TabIndex = 2;
+            // 
+            // vScrollBar1
+            // 
+            this.vScrollBar1.Location = new System.Drawing.Point(518, 47);
+            this.vScrollBar1.Name = "vScrollBar1";
+            this.vScrollBar1.Size = new System.Drawing.Size(17, 152);
+            this.vScrollBar1.TabIndex = 3;
+            this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             // 
             // pictureBox1
             // 
@@ -495,6 +504,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Natsuki Takahashi Launcher";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -535,7 +545,6 @@
         private System.Windows.Forms.ToolStripMenuItem goToSleepToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem forceRestartToolStripMenuItem;
         private System.Windows.Forms.Panel artworkpanel2;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel configpanel2;
@@ -551,6 +560,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel aboutpanel2;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.Panel artworkscroller;
     }
 }
 

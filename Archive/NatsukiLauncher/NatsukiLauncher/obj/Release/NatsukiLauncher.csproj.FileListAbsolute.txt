@@ -9,3 +9,15 @@ C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\obj\Releas
 C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.csproj.CoreCompileInputs.cache
 C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.exe
 C:\Users\Piotr\Desktop\audiostreamer2\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.pdb
+C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\bin\Release\NatsukiLauncher.exe.config
+C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\bin\Release\NatsukiLauncher.exe
+C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\bin\Release\NatsukiLauncher.pdb
+C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.csproj.AssemblyReference.cache
+C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.csproj.SuggestedBindingRedirects.cache
+C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.Form1.resources
+C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.Properties.Resources.resources
+C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.csproj.GenerateResource.cache
+C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.csproj.CoreCompileInputs.cache
+C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.exe
+C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.pdb
+C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.ImageViewer.resources
