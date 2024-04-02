@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,6 +16,12 @@ public class DialogManager : MonoBehaviour
     public GameObject speechBubble; // Speech bubble object (namely, the dialogText's background)
     public bool speechBubbleVisible = false; // is SpeechBubble Visible?
 
+    public string currentLang = "en";
+
+    public static string[] knownLanguages =
+    {
+        "en", "jp"
+    };
 
     private VoiceManager voiceManager;
 
@@ -31,12 +39,16 @@ public class DialogManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5f); //wait 5 seconds before talking
         //add as many as you want
-        AddDialogToQueue(new DialogDefinition { message = "Hellluuuw!", showDelay = 1.4f, cooldown = 0.2f, voiceKey = "hello" });
-        AddDialogToQueue(new DialogDefinition { message = "Howw are yuu doin?", showDelay = 2f, cooldown = 0.2f, voiceKey = "how are you doin" });
-        AddDialogToQueue(new DialogDefinition { message = "I know im not yet ready to be able to help", showDelay = 3.8f, cooldown = 1.0f, voiceKey = "speech bubble" });
-        AddDialogToQueue(new DialogDefinition { message = "But am working on it, and soon..", showDelay = 2.0f, cooldown = 1.8f, voiceKey = "working on it" });
-        AddDialogToQueue(new DialogDefinition { message = "..i will be functional and helpful!", showDelay = 1.3f, cooldown = 1.2f, voiceKey = "it will animate" });
-        AddDialogToQueue(new DialogDefinition { message = "i coont wait to seeit!! :3", showDelay = 1.7f, cooldown = 3.9f, voiceKey = "i cant wait" });
+        ///AddDialogToQueue(new DialogDefinition { message = "Hellluuuw!", showDelay = 1.4f, cooldown = 0.2f, voiceKey = "hello" });
+        ///AddDialogToQueue(new DialogDefinition { message = "Howw are yuu doin?", showDelay = 2f, cooldown = 0.2f, voiceKey = "how are you doin" });
+        ///AddDialogToQueue(new DialogDefinition { message = "I know im not yet ready to be able to help", showDelay = 3.8f, cooldown = 1.0f, voiceKey = "speech bubble" });
+        ///AddDialogToQueue(new DialogDefinition { message = "But am working on it, and soon..", showDelay = 2.0f, cooldown = 1.8f, voiceKey = "working on it" });
+        ///AddDialogToQueue(new DialogDefinition { message = "..i will be functional and helpful!", showDelay = 1.3f, cooldown = 1.2f, voiceKey = "it will animate" });
+        ///AddDialogToQueue(new DialogDefinition { message = "i coont wait to seeit!! :3", showDelay = 1.7f, cooldown = 3.9f, voiceKey = "i cant wait" });
+        
+        // load the dialogs from the queue
+
+        LoadDialogsToQueue(GetDialogQueueFromFile("firsttime.queue"));
 
         /*
         foreach(DialogDefinition def in activeDialogQueue)
@@ -64,6 +76,11 @@ public class DialogManager : MonoBehaviour
         activeDialogQueue.Add(def);
     }
 
+    public void LoadDialogsToQueue(DialogDefinition[] dialogs)
+    {
+        activeDialogQueue.AddRange(dialogs);
+    }
+
     public void RunDialog()
     {
         if(activeDialogQueue.Count > 0)
@@ -75,6 +92,12 @@ public class DialogManager : MonoBehaviour
             }
 
             activeDialog = activeDialogQueue[0]; //set current dialog as the active one
+
+            if (string.IsNullOrWhiteSpace(activeDialog.message))
+            {
+                SetPrimaryDialogMessageToTranslated(activeDialog, currentLang);
+            }
+
             voiceManager.PlayClip(activeDialog.voiceKey); //play the dialog's voice-over
             StartCoroutine(TypeDialogMessage()); //"type" the dialog
         }
@@ -190,6 +213,119 @@ public class DialogManager : MonoBehaviour
         return "</" + prefix.Replace('<', '\0');
     }
 
+    public DialogDefinition[] GetDialogQueueFromFile(string queueName)
+    {
+        string[] dialogs;
+
+        if (queueName.EndsWith(".queue"))
+        {
+            dialogs = File.ReadAllLines(Environment.CurrentDirectory + "\\res\\queue\\" + queueName);
+        }
+        else
+        {
+            dialogs = File.ReadAllLines(Environment.CurrentDirectory + "\\res\\queue\\" + queueName + ".queue");
+        }
+
+        List<DialogDefinition> dialogsInQueue = new List<DialogDefinition>();
+
+        foreach(string s in dialogs)
+        {
+            dialogsInQueue.Add(GetDialogFromFile(Environment.CurrentDirectory + "\\res\\dialog\\natsuki\\" + queueName.Replace(".queue", string.Empty) + "\\" + s));
+        }
+
+        return dialogsInQueue.ToArray();
+    }
+
+    public DialogDefinition GetDialogFromFile(string filePath)
+    {
+        DialogDefinition dialogDef0 = new DialogDefinition();
+
+        if (string.Equals(Path.GetExtension(filePath), ".dialog", System.StringComparison.OrdinalIgnoreCase))
+        {
+            string[] dialogData = File.ReadAllLines(filePath);
+
+            dialogDef0.translatedMessages = new List<TranslatedMessage>();
+
+            foreach (string s in dialogData)
+            {
+                //handle translations
+                foreach(string s1 in knownLanguages)
+                {
+                    if(s.StartsWith(s1 + "="))
+                    {
+                        dialogDef0.translatedMessages.Add(new TranslatedMessage { langPrefix = s1, translatedMessage = 
+                            s.Replace(s1 + "=", string.Empty, StringComparison.OrdinalIgnoreCase)
+                        });
+                    }
+                }
+
+                if (s.StartsWith("voicekey=", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    if (string.Equals(s, "voicekey=(auto)", System.StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(s, "voicekey=auto", System.StringComparison.OrdinalIgnoreCase))
+                    {
+                        dialogDef0.voiceKey = GetVoiceKeyByDialogData(Path.GetFileName(filePath));
+                    }
+                    else
+                    {
+                        dialogDef0.voiceKey = s.Replace("voicekey=", string.Empty, StringComparison.OrdinalIgnoreCase);
+                    }
+                }
+
+                if (s.StartsWith("chard=", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    if (string.Equals("chard=(auto)", s, System.StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals("chard=auto", s, System.StringComparison.OrdinalIgnoreCase))
+                    {
+                        dialogDef0.showDelay = VoiceManager.GetClipFromFile(Environment.CurrentDirectory + "\\res\\voice\\natsuki\\" + dialogDef0.voiceKey).length;
+                    }
+                    else
+                    {
+                        dialogDef0.showDelay = float.Parse(s.Replace("chard=", string.Empty, StringComparison.OrdinalIgnoreCase));
+                    }
+                }
+
+                if(s.StartsWith("cooldown=", StringComparison.OrdinalIgnoreCase))
+                {
+                    dialogDef0.cooldown = float.Parse(s.Replace("cooldown=", string.Empty, StringComparison.OrdinalIgnoreCase));
+                }
+            }
+
+            return dialogDef0;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public string GetVoiceKeyByDialogData(string dialogFileName)
+    {
+        if(dialogFileName.EndsWith(".dialog", System.StringComparison.OrdinalIgnoreCase))
+        {
+            return dialogFileName.Replace(".dialog", string.Empty) + ".wav";
+        }
+        else
+        {
+            return dialogFileName + ".wav";
+        }
+    }
+
+    public void SetPrimaryDialogMessageToTranslated(DialogDefinition dialog0, string lang)
+    {
+        if(dialog0.translatedMessages != null &&
+            dialog0.translatedMessages.Count > 0)
+        {
+            foreach(TranslatedMessage tmsg in dialog0.translatedMessages)
+            {
+                if(tmsg.langPrefix == lang)
+                {
+                    dialog0.message = tmsg.translatedMessage;
+                }
+            }
+        }
+    }
+
 }
 
 [System.Serializable]
@@ -203,6 +339,8 @@ public class DialogDefinition //Our dialog object
     // <color="green"> - Coloured Text
     // please refer to: https://docs.unity3d.com/Packages/com.unity.textmeshpro@4.0/manual/RichText.html for more information
 
+    public List<TranslatedMessage> translatedMessages;
+
     public float showDelay; // the time (in seconds) in which this message will fully "type" itself
     public float cooldown; // how long the message should stay on screen after being fully "typed"? (in seconds)
 
@@ -212,4 +350,10 @@ public class DialogDefinition //Our dialog object
     // todo: text effects
 
     // todo: dialog type
+}
+
+public class TranslatedMessage
+{
+    public string langPrefix { get; set; }
+    public string translatedMessage { get; set; }
 }

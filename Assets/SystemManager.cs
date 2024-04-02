@@ -9,6 +9,8 @@ using System.Drawing;
 
 public class SystemManager : MonoBehaviour
 {
+    public static SystemManager instance;
+
     // Win32 import START
     [DllImport("user32.dll")]
     public static extern int MessageBox(IntPtr hWnd, string text, string caption, uint type);
@@ -82,6 +84,11 @@ public class SystemManager : MonoBehaviour
 
     public List<string> allowedProcesses = new List<string>();
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -95,7 +102,7 @@ public class SystemManager : MonoBehaviour
 
 #if !UNITY_EDITOR
         // transparency
-        IntPtr hWnd = GetActiveWindow();
+        hWnd = GetActiveWindow();
         //hWnd = GetCurrentProcess();
         // a value of -1 on any of the window margins, makes the backgrouond of the game's window transparent
         MARGINS margins = new MARGINS { cxLeftWidth = -1 };
@@ -113,25 +120,53 @@ public class SystemManager : MonoBehaviour
 #endif
     }
 
+    // spec
+    const uint WS_POPUP = 0x80000000;
+    const uint WS_VISIBLE = 0x10000000;
+
     private void SetClickThrough(bool clickthrough)
     {
         if (clickthrough)
         {
+#if !UNITY_EDITOR
             SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_LAYERED | WS_EX_TRANSPARENT);
+            //SetWindowLong (hWnd, -20, (uint)524288 | (uint)32);
+            //other code
+#endif
         }
         else
         {
+#if !UNITY_EDITOR
             SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_LAYERED);
+            //SetWindowLong(hWnd, -20, WS_POPUP | WS_VISIBLE);
+            //other code
+#endif
         }
     }
+
+    public LayerMask overlayLayers; // layers ignored by the overlap check
 
     // Update is called once per frame
     void Update()
     {
         Vector3 mousePosition = Input.mousePosition;
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        Vector3 worldPosition = displayCamera.ScreenToWorldPoint(mousePosition);
 
-        SetClickThrough(Physics2D.OverlapPoint(worldPosition) == null);
+        Vector2 mousePosition0 = displayCamera.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition0, Vector2.zero, Mathf.Infinity, ~overlayLayers);
+
+        if (hit.collider != null)
+        {
+            //print("TRU");
+            SetClickThrough(/*Physics2D.OverlapPoint(worldPosition) == null*/false);
+        }
+        else
+        {
+            //print("FALS");
+            SetClickThrough(/*Physics2D.OverlapPoint(worldPosition) == null*/true);
+        }
+
+        //print("overlap:" + Physics2D.OverlapPoint(worldPosition).ToString());
         ResoultionUpdate();
     }
 

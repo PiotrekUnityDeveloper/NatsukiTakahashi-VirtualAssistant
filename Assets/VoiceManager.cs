@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Security;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class VoiceManager : MonoBehaviour
 {
@@ -10,8 +13,12 @@ public class VoiceManager : MonoBehaviour
     public List<VoiceDefinition> voiceDefs = new List<VoiceDefinition>(); //this stores our voiceovers and their keys
     public AudioSource characterAudioSource; //audio source
 
+    public bool useFromFile = true;
+    public string fileSources = "";
+
     private void Awake()
     {
+        fileSources = Path.Combine(Path.GetDirectoryName(Application.dataPath), "res", "voice");
         InitializeDefinitions();
     }
 
@@ -38,8 +45,53 @@ public class VoiceManager : MonoBehaviour
     public void PlayClip(string key) // Play a clip based on voiceClip
     {
         if(characterAudioSource.isPlaying) characterAudioSource.Stop();
-        characterAudioSource.clip = GetVoiceDefinition(key).voiceClip;
+
+        if (useFromFile)
+        {
+            fileSources = Environment.CurrentDirectory + "\\res\\voice\\natsuki\\" + key;
+            characterAudioSource.clip = GetClipFromFile(fileSources);
+        }
+        else
+        {
+            characterAudioSource.clip = GetVoiceDefinition(key).voiceClip;
+        }
+
         characterAudioSource.Play();
+    }
+
+    public static AudioClip GetClipFromFile(string filePath)
+    {
+        // Check if the file exists
+        if (File.Exists(filePath))
+        {
+            // Create UnityWebRequest
+            UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip("file://" + filePath, AudioType.WAV);
+
+            // Send the request
+            request.SendWebRequest();
+
+            // Wait until request is done
+            while (!request.isDone) { }
+
+            // Check for errors
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                // Get the audio clip
+                AudioClip clip = DownloadHandlerAudioClip.GetContent(request);
+
+                return clip;
+            }
+            else
+            {
+                Debug.LogError("Error loading audio file: " + request.error);
+            }
+        }
+        else
+        {
+            Debug.LogError("File does not exist at path: " + filePath);
+        }
+
+        return null;
     }
 
     public void StopClip()
