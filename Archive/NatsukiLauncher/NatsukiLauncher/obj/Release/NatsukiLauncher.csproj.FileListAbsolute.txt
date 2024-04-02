@@ -13,7 +13,6 @@ C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher
 C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\bin\Release\NatsukiLauncher.exe
 C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\bin\Release\NatsukiLauncher.pdb
 C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.csproj.AssemblyReference.cache
-C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.csproj.SuggestedBindingRedirects.cache
 C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.Form1.resources
 C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.Properties.Resources.resources
 C:\Users\Piotr\Desktop\NatsukiTakahashi-VirtualAssistant\Archive\NatsukiLauncher\NatsukiLauncher\obj\Release\NatsukiLauncher.csproj.GenerateResource.cache

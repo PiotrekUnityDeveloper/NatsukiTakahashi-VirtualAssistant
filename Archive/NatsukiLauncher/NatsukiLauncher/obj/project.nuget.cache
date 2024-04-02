@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "oXQ19fMRbXQ2doMwAndbb07uf9aNfYaoAK0852n/GLsA135tNaYjg4cCGe+PTAAKEbbJYUExJGR+W1ukVWebPg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Piotr\\Desktop\\NatsukiTakahashi-VirtualAssistant\\Archive\\NatsukiLauncher\\NatsukiLauncher\\NatsukiLauncher.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Piotr\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "C:\\Users\\Piotr\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net45\\1.0.3\\microsoft.netframework.referenceassemblies.net45.1.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,62 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Piotr\\Desktop\\NatsukiTakahashi-VirtualAssistant\\Archive\\NatsukiLauncher\\NatsukiLauncher\\NatsukiLauncher.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Piotr\\Desktop\\NatsukiTakahashi-VirtualAssistant\\Archive\\NatsukiLauncher\\NatsukiLauncher\\NatsukiLauncher.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Piotr\\Desktop\\NatsukiTakahashi-VirtualAssistant\\Archive\\NatsukiLauncher\\NatsukiLauncher\\NatsukiLauncher.csproj",
+        "projectName": "NatsukiLauncher",
+        "projectPath": "C:\\Users\\Piotr\\Desktop\\NatsukiTakahashi-VirtualAssistant\\Archive\\NatsukiLauncher\\NatsukiLauncher\\NatsukiLauncher.csproj",
+        "packagesPath": "C:\\Users\\Piotr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Piotr\\Desktop\\NatsukiTakahashi-VirtualAssistant\\Archive\\NatsukiLauncher\\NatsukiLauncher\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net45"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net45": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net45": {
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.3, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
