@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     {
         Vector3 cursorPosition = Input.mousePosition;
         cursorPosition.z = 10f;
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(cursorPosition);
+        Vector3 worldPosition = SystemManager.instance.displayCamera.ScreenToWorldPoint(cursorPosition);
         trackingPoint.transform.position = worldPosition;
     }
 
