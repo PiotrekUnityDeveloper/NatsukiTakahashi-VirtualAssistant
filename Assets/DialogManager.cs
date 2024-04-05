@@ -215,22 +215,16 @@ public class DialogManager : MonoBehaviour
 
     public DialogDefinition[] GetDialogQueueFromFile(string queueName)
     {
-        string[] dialogs;
+        string queuePath = Path.Combine(Environment.CurrentDirectory, "res", "queue", queueName.EndsWith(".queue") ? queueName : queueName + ".queue");
 
-        if (queueName.EndsWith(".queue"))
-        {
-            dialogs = File.ReadAllLines(Environment.CurrentDirectory + "\\res\\queue\\" + queueName);
-        }
-        else
-        {
-            dialogs = File.ReadAllLines(Environment.CurrentDirectory + "\\res\\queue\\" + queueName + ".queue");
-        }
+        string[] dialogs = File.ReadAllLines(queuePath);
 
         List<DialogDefinition> dialogsInQueue = new List<DialogDefinition>();
 
-        foreach(string s in dialogs)
+        foreach (string s in dialogs)
         {
-            dialogsInQueue.Add(GetDialogFromFile(Environment.CurrentDirectory + "\\res\\dialog\\natsuki\\" + queueName.Replace(".queue", string.Empty) + "\\" + s));
+            string dialogFilePath = Path.Combine(Environment.CurrentDirectory, "res", "dialog", "natsuki", queueName.Replace(".queue", string.Empty), s);
+            dialogsInQueue.Add(GetDialogFromFile(dialogFilePath));
         }
 
         return dialogsInQueue.ToArray();
@@ -240,7 +234,7 @@ public class DialogManager : MonoBehaviour
     {
         DialogDefinition dialogDef0 = new DialogDefinition();
 
-        if (string.Equals(Path.GetExtension(filePath), ".dialog", System.StringComparison.OrdinalIgnoreCase))
+        if (string.Equals(Path.GetExtension(filePath), ".dialog", StringComparison.OrdinalIgnoreCase))
         {
             string[] dialogData = File.ReadAllLines(filePath);
 
@@ -248,21 +242,23 @@ public class DialogManager : MonoBehaviour
 
             foreach (string s in dialogData)
             {
-                //handle translations
-                foreach(string s1 in knownLanguages)
+                // Handle translations
+                foreach (string s1 in knownLanguages)
                 {
-                    if(s.StartsWith(s1 + "="))
+                    if (s.StartsWith(s1 + "=", StringComparison.OrdinalIgnoreCase))
                     {
-                        dialogDef0.translatedMessages.Add(new TranslatedMessage { langPrefix = s1, translatedMessage = 
-                            s.Replace(s1 + "=", string.Empty, StringComparison.OrdinalIgnoreCase)
+                        dialogDef0.translatedMessages.Add(new TranslatedMessage
+                        {
+                            langPrefix = s1,
+                            translatedMessage = s.Replace(s1 + "=", string.Empty, StringComparison.OrdinalIgnoreCase)
                         });
                     }
                 }
 
-                if (s.StartsWith("voicekey=", System.StringComparison.OrdinalIgnoreCase))
+                if (s.StartsWith("voicekey=", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (string.Equals(s, "voicekey=(auto)", System.StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(s, "voicekey=auto", System.StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(s, "voicekey=(auto)", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(s, "voicekey=auto", StringComparison.OrdinalIgnoreCase))
                     {
                         dialogDef0.voiceKey = GetVoiceKeyByDialogData(Path.GetFileName(filePath));
                     }
@@ -272,12 +268,12 @@ public class DialogManager : MonoBehaviour
                     }
                 }
 
-                if (s.StartsWith("chard=", System.StringComparison.OrdinalIgnoreCase))
+                if (s.StartsWith("chard=", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (string.Equals("chard=(auto)", s, System.StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals("chard=auto", s, System.StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(s, "chard=(auto)", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(s, "chard=auto", StringComparison.OrdinalIgnoreCase))
                     {
-                        dialogDef0.showDelay = VoiceManager.GetClipFromFile(Environment.CurrentDirectory + "\\res\\voice\\natsuki\\" + dialogDef0.voiceKey).length;
+                        dialogDef0.showDelay = VoiceManager.GetClipFromFile(Path.Combine(Environment.CurrentDirectory, "res", "voice", "natsuki", dialogDef0.voiceKey)).length;
                     }
                     else
                     {
@@ -285,7 +281,7 @@ public class DialogManager : MonoBehaviour
                     }
                 }
 
-                if(s.StartsWith("cooldown=", StringComparison.OrdinalIgnoreCase))
+                if (s.StartsWith("cooldown=", StringComparison.OrdinalIgnoreCase))
                 {
                     dialogDef0.cooldown = float.Parse(s.Replace("cooldown=", string.Empty, StringComparison.OrdinalIgnoreCase));
                 }
