@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         // List through all of them
         foreach (Process theprocess in processlist)
         {
-            print("Process: " + theprocess.ProcessName + " ID:" + theprocess.Id); // debug
+            //print("Process: " + theprocess.ProcessName + " ID:" + theprocess.Id); // debug
 
             // Now, we iterate through a list of known processes, to know if 'theprocess' is a known process our character can recognize
             foreach(String s in knownProcesses)

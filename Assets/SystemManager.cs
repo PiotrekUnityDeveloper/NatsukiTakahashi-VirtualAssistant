@@ -428,6 +428,10 @@ public class SystemManager : MonoBehaviour
             //Update the window size/bounds
             windowObject.transform.localScale = new Vector3(worldWidth.magnitude, worldHeight.magnitude, 1f);
         }
+        else
+        {
+            Destroy(windowObject);
+        }
     }
 
     public void AdjustCameraToFitObject(Camera orthographicCamera, GameObject gameObject)
@@ -441,7 +445,7 @@ public class SystemManager : MonoBehaviour
         // Set camera size
         orthographicCamera.orthographicSize = requiredCameraSize / 2;
 
-        print("Border Width = " + objectBounds.size.x + " : " + objectBounds.size.y + "  Camera Size: " + orthographicCamera.orthographicSize);
+        //print("Border Width = " + objectBounds.size.x + " : " + objectBounds.size.y + "  Camera Size: " + orthographicCamera.orthographicSize);
 
         // Set camera position to center the object
         Vector3 objectCenter = objectBounds.center;
