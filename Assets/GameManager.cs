@@ -45,9 +45,16 @@ public class GameManager : MonoBehaviour
         "Discord",
         "Chrome",
         "AudioStreamer",
-        //"VisualStudio",
+        //"VisualStudio",adobeapps,bluestacks,nox(nobody use nox anyway),clipstudiopaint,krita,
         "Taskmgr",
         "SampleWindow",
+        "firefox",
+        "steamwebhelper",
+        "EXPLORER",
+        "vlc",
+        "WinWord",
+        "Excel",
+        "POWERPNT"
     };
     
     // Win32 import START
