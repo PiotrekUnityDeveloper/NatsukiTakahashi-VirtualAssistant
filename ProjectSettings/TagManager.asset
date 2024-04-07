@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: AppWindow
+    uniqueID: 1396701897
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -83,6 +83,7 @@ public class SystemManager : MonoBehaviour
     private Resolution previousResolution;
 
     public List<string> allowedProcesses = new List<string>();
+    //public LayerMask targetWindowTrackLayer;
 
     private void Awake()
     {
@@ -370,6 +371,7 @@ public class SystemManager : MonoBehaviour
                 // Instantiate the square GameObject
                 GameObject square = Instantiate(windowPrefab, worldCenter, Quaternion.identity);
 
+                square.layer = LayerMask.NameToLayer("Ignore Raycast");
                 WindowDefinition windef = square.AddComponent<WindowDefinition>();
                 windef.systemManager = this;
                 windef.myProcess = process;

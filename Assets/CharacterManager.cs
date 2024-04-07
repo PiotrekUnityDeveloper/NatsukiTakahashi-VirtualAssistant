@@ -18,7 +18,7 @@ public class CharacterManager : MonoBehaviour
 
     private void OnMouseDown()
     {
-        
+        if(mainContextM.isOpened) HideMainContextMenu();
     }
 
     private void OnMouseOver()
