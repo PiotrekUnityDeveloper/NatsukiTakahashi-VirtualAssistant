@@ -80,6 +80,10 @@ public class CMenu : MonoBehaviour
         this.isOpened = false;
         this.animator.SetBool("opened", false);
 
+        this.CollapseOpenedSubMenus();
+        yield return new WaitForSeconds(0.5f);
+
+
         foreach (CMenuItem menuitem in menuItems)
         {
             yield return new WaitForSeconds(0.1f);
