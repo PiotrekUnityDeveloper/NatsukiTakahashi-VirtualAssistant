@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
         //g.SetActive(true);
         g.GetComponent<CanvasGroup>().alpha = 1;
         g.GetComponent<Image>().raycastTarget = true;
+		g.GetComponent<BoxCollider2D>().isTrigger = false;
     }
 
     public void ExitApp(GameObject g)
@@ -116,6 +117,7 @@ public class GameManager : MonoBehaviour
         //g.SetActive(false);
         g.GetComponent<CanvasGroup>().alpha = 0;
         g.GetComponent<Image>().raycastTarget = false;
+		g.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
     public void ToggleApp(GameObject g)
