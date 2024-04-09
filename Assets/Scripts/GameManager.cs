@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
         //g.SetActive(true);
         g.GetComponent<CanvasGroup>().alpha = 1;
         g.GetComponent<Image>().raycastTarget = true;
-		g.GetComponent<BoxCollider2D>().isTrigger = false;
+		//g.GetComponent<BoxCollider2D>().isTrigger = false;
 		g.transform.localScale = new Vector3(initialWindowSize, initialWindowSize, initialWindowSize);
     }
 
