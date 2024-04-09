@@ -159,7 +159,14 @@ public class SystemManager : MonoBehaviour
         if (hit.collider != null)
         {
             //print("TRU");
-            SetClickThrough(/*Physics2D.OverlapPoint(worldPosition) == null*/false);
+            if (!hit.collider.CompareTag("IgnoreRaycast"))
+            {
+                SetClickThrough(/*Physics2D.OverlapPoint(worldPosition) == null*/false);
+            }
+            else
+            {
+                SetClickThrough(/*Physics2D.OverlapPoint(worldPosition) == null*/true);
+            }
         }
         else
         {
