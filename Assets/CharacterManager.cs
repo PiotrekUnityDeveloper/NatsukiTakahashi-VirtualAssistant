@@ -1,6 +1,9 @@
+using Live2D.Cubism.Framework.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -54,7 +57,7 @@ public class CharacterManager : MonoBehaviour
         mainContextM.HideMenu();
     }
 
-    public void MoveContextMenuToCursor(CMenu cmenu)
+    public static void MoveContextMenuToCursor(CMenu cmenu)
     {
         // Get the RectTransform of the menu
         RectTransform menuRectTransform = cmenu.gameObject.GetComponent<RectTransform>();
@@ -64,5 +67,57 @@ public class CharacterManager : MonoBehaviour
 
         // Set the local position of the menu within the canvas
         menuRectTransform.localPosition = localPoint;
+    }
+
+    public float currentCharacterScale = 1f;
+    private float scaleChange = 0.25f;
+    public Slider characterScaleSlider;
+
+    public void ModifyCharacterScale(float value)
+    {
+        if (characterScaleSlider.value + (value) <= characterScaleSlider.maxValue &&
+            characterScaleSlider.value + (value) >= characterScaleSlider.minValue)
+        {
+            characterScaleSlider.value += value;
+            UpdateCharacterScale();
+        }
+        else if(value > 0) //positive, round up
+        {
+            characterScaleSlider.value = characterScaleSlider.maxValue;
+            UpdateCharacterScale();
+        }
+        else if(value < 0) //negative, round down
+        {
+            characterScaleSlider.value = characterScaleSlider.minValue;
+            UpdateCharacterScale();
+        }
+    }
+
+    public void ModifyCharacterScale(bool negative)
+    {
+        float value = negative ? scaleChange* -1 : scaleChange;
+
+        if (characterScaleSlider.value + (value) <= characterScaleSlider.maxValue &&
+            characterScaleSlider.value + (value) >= characterScaleSlider.minValue)
+        {
+            characterScaleSlider.value += value;
+            UpdateCharacterScale();
+        }
+        else if (value > 0) //positive, round up
+        {
+            characterScaleSlider.value = characterScaleSlider.maxValue;
+            UpdateCharacterScale();
+        }
+        else if (value < 0) //negative, round down
+        {
+            characterScaleSlider.value = characterScaleSlider.minValue;
+            UpdateCharacterScale();
+        }
+    }
+
+    public void UpdateCharacterScale()
+    {
+        this.gameObject.transform.localScale = new Vector3(characterScaleSlider.value,
+            characterScaleSlider.value, characterScaleSlider.value);
     }
 }

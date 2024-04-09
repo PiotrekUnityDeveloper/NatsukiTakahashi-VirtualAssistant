@@ -80,6 +80,9 @@ public class CMenuItem : MonoBehaviour
 
     public void CollapseOpenedSubMenusAndOpenNew()
     {
+        if(containedMenu == null)
+            return;
+
         parent.CollapseOpenedSubMenusAndIgnore(this.containedMenu);
         //parent.CollapseOpenedSubMenus(); // collapses itself when hovered twice ;i
         ExtendContainedMenu();

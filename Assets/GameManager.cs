@@ -7,6 +7,7 @@ using UnityEngine;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 using Live2D.Cubism.Core;
 using Live2D.Cubism.Framework.LookAt;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -102,6 +103,35 @@ public class GameManager : MonoBehaviour
         Vector3 worldPosition = SystemManager.instance.displayCamera.ScreenToWorldPoint(cursorPosition);
         trackingPoint.transform.position = worldPosition;
     }
+
+    public void LaunchApp(GameObject g)
+    {
+        //g.SetActive(true);
+        g.GetComponent<CanvasGroup>().alpha = 1;
+        g.GetComponent<Image>().raycastTarget = true;
+    }
+
+    public void ExitApp(GameObject g)
+    {
+        //g.SetActive(false);
+        g.GetComponent<CanvasGroup>().alpha = 0;
+        g.GetComponent<Image>().raycastTarget = false;
+    }
+
+    public void ToggleApp(GameObject g)
+    {
+        //g.SetActive(!g.activeInHierarchy);
+        if (g.GetComponent<CanvasGroup>().alpha > 0) // basically 1, was enabled
+        {
+            ExitApp(g);
+        }
+        else
+        {
+            LaunchApp(g);
+        }
+    }
+
+    // EXTREMELY BASIC FOR NOW, IKKKK
 
 
 }
