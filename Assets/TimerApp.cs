@@ -54,6 +54,8 @@ public class TimerApp : MonoBehaviour
             pauseIndicator.SetActive(false);
 
             animatedImage.fillAmount = 1;
+            focusedTimerTime.text = "00:00";
+            focusedTimerName.text = "";
 
             if (activeTimers.Count > 0)
             {
