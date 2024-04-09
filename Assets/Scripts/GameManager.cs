@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     // Reference for our character object!
     public GameObject character;
+	private float initialWindowSize = 3f; //TODO: automatize or sum
 
     // Start is called before the first frame update
     void Start()
@@ -110,6 +111,7 @@ public class GameManager : MonoBehaviour
         g.GetComponent<CanvasGroup>().alpha = 1;
         g.GetComponent<Image>().raycastTarget = true;
 		g.GetComponent<BoxCollider2D>().isTrigger = false;
+		g.transform.localScale = new Vector3(initialWindowSize, initialWindowSize, initialWindowSize);
     }
 
     public void ExitApp(GameObject g)
@@ -118,6 +120,7 @@ public class GameManager : MonoBehaviour
         g.GetComponent<CanvasGroup>().alpha = 0;
         g.GetComponent<Image>().raycastTarget = false;
 		g.GetComponent<BoxCollider2D>().isTrigger = true;
+		g.transform.localScale = new Vector3(0, 0, 0);
     }
 
     public void ToggleApp(GameObject g)
