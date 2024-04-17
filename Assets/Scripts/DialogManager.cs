@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class DialogManager : MonoBehaviour
 {
+    public static DialogManager Instance;
     // We keep up with all the dialogs, so they show up in order and not all at once
     public List<DialogDefinition> activeDialogQueue = new List<DialogDefinition>();
     public DialogDefinition activeDialog = null; // current dialog
@@ -27,6 +28,7 @@ public class DialogManager : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         voiceManager = this.gameObject.GetComponent<VoiceManager>();
     }
 
