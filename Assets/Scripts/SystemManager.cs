@@ -158,15 +158,20 @@ public class SystemManager : MonoBehaviour
 
         if (hit.collider != null)
         {
-            //print("TRU");
-            if (!hit.collider.CompareTag("IgnoreRaycast"))
-            {
-                SetClickThrough(/*Physics2D.OverlapPoint(worldPosition) == null*/false);
-            }
-            else
-            {
-                SetClickThrough(/*Physics2D.OverlapPoint(worldPosition) == null*/true);
-            }
+            if (clickThrough != prevClickThrough) {
+				if (clickThrough) {
+					#if !UNITY_EDITOR
+					SetWindowLong (hwnd, -20, (uint)524288 | (uint)32);
+					//other code
+					#endif
+				} else {
+					#if !UNITY_EDITOR
+					SetWindowLong(hwnd, -20, WS_POPUP | WS_VISIBLE);
+					//other code
+					#endif
+				}
+				prevClickThrough = clickThrough;
+			}
         }
         else
         {
