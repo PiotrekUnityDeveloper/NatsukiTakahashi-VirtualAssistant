@@ -9,3 +9,6 @@ Current Features
 -Timer (just a timer, she'll remind you when the time ran out, so that you don't overcook something)
 -Configuarble dialogue (incompleted)(refer to DIALOG SYSTEM documentation)
 -cute
+
+
+License: MIT
